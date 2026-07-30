@@ -64,6 +64,7 @@ SBI Small Cap (Sharpe: 0.94)
 Deliverables
 Day	Task	Status
 Day 1	Project Setup + Data Ingestion	✅
+
 Day 2	Data Cleaning + SQLite DB	✅
 Day 3	EDA Analysis (15+ charts)	✅
 Day 4	Performance Analytics	✅
