@@ -1,0 +1,54 @@
+-- Query 1: Top 5 funds by AUM
+SELECT scheme_name, aum_crore 
+FROM fact_performance 
+ORDER BY aum_crore DESC 
+LIMIT 5;
+
+-- Query 2: Average NAV per month
+SELECT substr(date,1,7) as month, 
+ROUND(AVG(nav),2) as avg_nav 
+FROM fact_nav 
+GROUP BY month;
+
+-- Query 3: Funds with expense ratio < 1%
+SELECT scheme_name, expense_ratio_pct 
+FROM fact_performance 
+WHERE expense_ratio_pct < 1.0;
+
+-- Query 4: Transactions by state
+SELECT state, COUNT(*) as total_tx, 
+SUM(amount_inr) as total_amount 
+FROM fact_transactions 
+GROUP BY state;
+
+-- Query 5: Transactions by type
+SELECT transaction_type, COUNT(*) as count 
+FROM fact_transactions 
+GROUP BY transaction_type;
+
+-- Query 6: Top 5 funds by 1yr return
+SELECT scheme_name, return_1yr_pct 
+FROM fact_performance 
+ORDER BY return_1yr_pct DESC 
+LIMIT 5;
+
+-- Query 7: Average Sharpe ratio
+SELECT ROUND(AVG(sharpe_ratio),2) as avg_sharpe 
+FROM fact_performance;
+
+-- Query 8: Funds with positive alpha
+SELECT scheme_name, alpha 
+FROM fact_performance 
+WHERE alpha > 0 
+ORDER BY alpha DESC;
+
+-- Query 9: Monthly transaction volume
+SELECT substr(transaction_date,1,7) as month, 
+COUNT(*) as transactions 
+FROM fact_transactions 
+GROUP BY month;
+
+-- Query 10: Very high risk funds
+SELECT scheme_name, risk_grade 
+FROM fact_performance 
+WHERE risk_grade = 'Very High';
